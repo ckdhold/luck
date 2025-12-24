@@ -80,7 +80,7 @@ watch(() => imgUploadToast.value, (val) => {
     </div>
   </div>
 
-  <div>
+  <div class="p-6">
     <div class="">
       <label for="explore">
         <input

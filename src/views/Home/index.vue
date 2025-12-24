@@ -431,7 +431,7 @@ function startLottery() {
   for (let i = 0; i < luckyCount.value; i++) {
     if (personPool.value.length > 0) {
       // 解决随机元素概率过于不均等问题
-      const randomIndex = Math.floor(Math.random() * (personPool.value.length - 1))
+      const randomIndex = Math.floor(Math.random() * personPool.value.length)
       luckyTargets.value.push(personPool.value[randomIndex])
       personPool.value.splice(randomIndex, 1)
     }
@@ -594,8 +594,8 @@ function randomBallData(mod: 'default' | 'lucky' | 'sphere' = 'default') {
     const personRandomIndexArr: number[] = []
     for (let i = 0; i < indexLength; i++) {
       // 解决随机元素概率过于不均等问题
-      const randomCardIndex = Math.floor(Math.random() * (tableData.value.length - 1))
-      const randomPersonIndex = Math.floor(Math.random() * (allPersonList.value.length - 1))
+      const randomCardIndex = Math.floor(Math.random() * tableData.value.length)
+      const randomPersonIndex = Math.floor(Math.random() * allPersonList.value.length)
       if (luckyCardList.value.includes(randomCardIndex)) {
         continue
       }

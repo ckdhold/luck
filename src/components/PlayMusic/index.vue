@@ -76,13 +76,42 @@ function enterHome() {
   router.push('/log-lottery')
 }
 
+const isFullscreen = ref(false)
+
+function toggleFullscreen() {
+  if (!document.fullscreenElement) {
+    // 进入全屏
+    document.documentElement.requestFullscreen().then(() => {
+      isFullscreen.value = true
+    }).catch((err) => {
+      console.error('无法进入全屏:', err)
+    })
+  }
+  else {
+    // 退出全屏
+    document.exitFullscreen().then(() => {
+      isFullscreen.value = false
+    }).catch((err) => {
+      console.error('无法退出全屏:', err)
+    })
+  }
+}
+
 onMounted(() => {
   globalConfig.setCurrentMusic(localMusicList.value[0], true)
   onPlayEnd()
   // 不使用空格控制audio
+  
+  // 监听全屏状态变化
+  document.addEventListener('fullscreenchange', handleFullscreenChange)
 })
+function handleFullscreenChange() {
+  isFullscreen.value = !!document.fullscreenElement
+}
+
 onUnmounted(() => {
   audio.value.removeEventListener('ended', nextPlay)
+  document.removeEventListener('fullscreenchange', handleFullscreenChange)
 })
 watch(currentMusic, (val: any) => {
   if (!val.paused && audio.value) {
@@ -119,6 +148,20 @@ watch(currentMusic, (val: any) => {
         @click="playMusic(currentMusic.item)" @click.right.prevent="nextPlay"
       >
         <svg-icon :name="currentMusic.paused ? 'play' : 'pause'" />
+      </div>
+    </div>
+
+    <div class="tooltip tooltip-left" :data-tip="isFullscreen ? t('tooltip.exitFullscreen') : t('tooltip.fullscreen')">
+      <div
+        class="flex items-center justify-center w-10 h-10 p-0 m-0 cursor-pointer setting-container bg-slate-500/50 rounded-l-xl hover:bg-slate-500/80 hover:text-blue-400/90"
+        @click="toggleFullscreen"
+      >
+        <svg v-if="!isFullscreen" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
+        </svg>
+        <svg v-else xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3" />
+        </svg>
       </div>
     </div>
   </div>

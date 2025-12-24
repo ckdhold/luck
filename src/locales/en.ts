@@ -109,6 +109,8 @@ export default {
     doneCount: 'Number of winners',
     edit: 'Edit',
     delete: 'Delete',
+    fullscreen: 'Fullscreen',
+    exitFullscreen: 'Exit Fullscreen',
   },
   error: {
     require: 'required field',

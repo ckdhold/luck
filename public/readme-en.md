@@ -29,3 +29,14 @@ Shortcuts are set up on the draw page.
 | --- | --- |
 | Space | Enter Draw / Start / Draw Lucky Winner / Continue |
 | Esc | Cancel |
+
+## Lottery Algorithm
+
+This project uses a random algorithm for lottery drawing to ensure fairness:
+
+- **Non-repetitive Random Sampling**: Uses `Math.random()` to generate random indices, ensuring equal probability for each participant
+- **Draw Without Replacement**: Winners are removed from the participant pool to prevent duplicate wins
+- **Dynamic Participant Pool**: The pool dynamically shrinks after each draw, ensuring fairness in subsequent draws
+- **Batch Drawing Support**: Supports dividing prizes into multiple batches for flexible configuration
+
+Open Source Code: [https://github.com/xiaolinbaba/luck](https://github.com/xiaolinbaba/luck)

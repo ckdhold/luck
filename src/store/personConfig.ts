@@ -2,7 +2,7 @@ import type { IPersonConfig, IPrizeConfig } from '@/types/storeType'
 
 import dayjs from 'dayjs'
 import { defineStore } from 'pinia'
-import { defaultPersonList } from './data'
+import { getDefaultPersonList } from './data'
 import { usePrizeConfig } from './prizeConfig'
 
 export const usePersonConfig = defineStore('person', {
@@ -135,7 +135,8 @@ export const usePersonConfig = defineStore('person', {
       this.personConfig.alreadyPersonList = []
     },
     setDefaultPersonList() {
-      this.personConfig.allPersonList = defaultPersonList
+      // 每次调用时生成新的随机数据
+      this.personConfig.allPersonList = getDefaultPersonList(50)
       this.personConfig.alreadyPersonList = []
     },
     // 重置所有配置

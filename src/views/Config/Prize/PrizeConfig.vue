@@ -150,7 +150,7 @@ watch(() => prizeList.value, (val: IPrizeConfig[]) => {
 <template>
   <div>
     <h2>{{ t('viewTitle.prizeManagement') }}</h2>
-    <div class="flex w-full gap-3">
+    <div class="flex w-full gap-3 mb-6">
       <button class="btn btn-info btn-sm" @click="addPrize">
         {{ t('button.add') }}
       </button>
@@ -160,15 +160,6 @@ watch(() => prizeList.value, (val: IPrizeConfig[]) => {
       <button class="btn btn-error btn-sm" @click="delAll">
         {{ t('button.allDelete') }}
       </button>
-    </div>
-    <div role="alert" class="w-full my-4 alert alert-info">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-6 h-6 stroke-current shrink-0">
-        <path
-          stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-        />
-      </svg>
-      <span>{{ t('dialog.tipResetPrize') }}</span>
     </div>
     <ul class="p-0 m-0">
       <li

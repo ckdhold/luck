@@ -109,6 +109,8 @@ export default {
     doneCount: '已抽取',
     edit: '编辑',
     delete: '删除',
+    fullscreen: '全屏',
+    exitFullscreen: '退出全屏',
   },
   error: {
     require: '必填项',
@@ -142,7 +144,7 @@ export default {
     operation: '操作',
     delete: '删除',
     removePerson: '移入未中奖名单',
-    defaultTitle: '大明内阁六部御前奏对',
+    defaultTitle: '火星工程集团 - 幸运大抽奖',
     xlsxName: '人口登记表-zhCn.xlsx',
     readmeName: 'readme-zhCn.md',
   },

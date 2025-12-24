@@ -13,6 +13,7 @@ import * as XLSX from 'xlsx'
 
 const { t } = useI18n()
 const personConfig = useStore().personConfig
+const prizeConfig = useStore().prizeConfig
 const { getAllPersonList: allPersonList, getAlreadyPersonList: alreadyPersonList } = storeToRefs(personConfig)
 const limitType = '.xlsx,.xls'
 // const personList = ref<any[]>([])
@@ -72,6 +73,8 @@ function exportData() {
 
 function resetData() {
   personConfig.resetAlreadyPerson()
+  // 同步重置奖项抽取进度（否则首页仍显示 3/3、2/2 等已抽完状态）
+  prizeConfig.resetDrawProgress()
 }
 
 function deleteAll() {

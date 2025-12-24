@@ -110,6 +110,29 @@ export const usePrizeConfig = defineStore('prize', {
       // 重要：必须深拷贝默认值，避免默认对象在抽奖过程中被污染导致“重置无效”
       this.prizeConfig = createDefaultPrizeConfig()
     },
+
+    // 仅重置“抽取进度”，不改动奖项的名称/人数/图片等配置
+    // 用于：清空人员中奖信息后，首页奖项进度也要同步清零
+    resetDrawProgress() {
+      const list = this.prizeConfig.prizeList
+      if (!list?.length) {
+        return
+      }
+
+      for (const prize of list) {
+        prize.isUsed = false
+        prize.isUsedCount = 0
+        if (prize.separateCount?.countList?.length) {
+          for (const countItem of prize.separateCount.countList) {
+            countItem.isUsedCount = 0
+          }
+        }
+      }
+
+      // 当前奖项切回第一个未使用奖项（此处全部已重置为未使用）
+      this.setCurrentPrize(list[0])
+      this.resetTemporaryPrize()
+    },
   },
   persist: {
     enabled: true,

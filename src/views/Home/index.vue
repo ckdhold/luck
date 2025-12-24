@@ -133,7 +133,17 @@ function init() {
 
     const detail = document.createElement('div')
     detail.className = 'card-detail'
-    detail.innerHTML = `${tableData.value[i].department}<br/>${tableData.value[i].identity}`
+    // 避免 innerHTML，防止未来导入数据导致 XSS 风险
+    detail.textContent = ''
+    if (tableData.value[i].department) {
+      detail.append(document.createTextNode(tableData.value[i].department))
+    }
+    if (tableData.value[i].department && tableData.value[i].identity) {
+      detail.append(document.createElement('br'))
+    }
+    if (tableData.value[i].identity) {
+      detail.append(document.createTextNode(tableData.value[i].identity))
+    }
     if (isShowAvatar.value)
       detail.style.display = 'none'
     element.appendChild(detail)

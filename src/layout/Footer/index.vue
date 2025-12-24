@@ -2,7 +2,8 @@
 import { footerList } from './config'
 
 function skip(url: string) {
-  window.open(url)
+  // 防止新窗口获取 window.opener（tabnabbing）
+  window.open(url, '_blank', 'noopener,noreferrer')
 }
 </script>
 

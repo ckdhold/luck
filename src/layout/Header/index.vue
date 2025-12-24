@@ -31,7 +31,7 @@ function skip(url: string) {
             </li>
           </ul>
         </div>
-        <a class="text-xl lg:pl-12 max-lg:mx-auto" href="https://vitejs.dev" target="_blank">
+        <a class="text-xl lg:pl-12 max-lg:mx-auto" href="https://vitejs.dev" target="_blank" rel="noopener noreferrer">
           <img src="/vite.svg" class="logo" alt="Vite logo">
         </a>
       </div>

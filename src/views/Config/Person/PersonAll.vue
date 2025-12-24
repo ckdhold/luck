@@ -189,7 +189,7 @@ onMounted(() => {
       </button>
       <div class="tooltip tooltip-bottom" :data-tip="t('tooltip.downloadTemplateTip')">
         <a
-          class="no-underline btn btn-secondary btn-sm" :download="t('data.xlsxName')" target="_blank"
+          class="no-underline btn btn-secondary btn-sm" :download="t('data.xlsxName')" target="_blank" rel="noopener noreferrer"
           :href="`/log-lottery/${t('data.xlsxName')}`"
         >{{ t('button.downloadTemplate') }}</a>
       </div>

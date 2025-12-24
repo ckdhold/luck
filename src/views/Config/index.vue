@@ -75,16 +75,19 @@ function skip(path: string) {
           <a
             href="https://thus.chat/"
             target="_blank"
+            rel="noopener noreferrer"
             class="text-inherit no-underline font-normal"
           >nabin-cn</a>.
           <a
             href="https://jinshuju.com/f/vaSGYu"
             target="_blank"
+            rel="noopener noreferrer"
             class="ml-1 text-inherit no-underline font-normal"
           >意见反馈.</a>
           <a
             href="https://donate.nabin.cn/"
             target="_blank"
+            rel="noopener noreferrer"
             class="ml-1 text-inherit no-underline font-normal"
           >赞赏.</a>
           All Rights Reserved.
@@ -92,6 +95,7 @@ function skip(path: string) {
         <a
           href="https://github.com/xiaolinbaba/luck"
           target="_blank"
+          rel="noopener noreferrer"
           class="cursor-pointer text-inherit hover:opacity-80 transition-opacity"
         >
           <svg-icon name="github" />

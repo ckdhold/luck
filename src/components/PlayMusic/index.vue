@@ -101,7 +101,7 @@ onMounted(() => {
   globalConfig.setCurrentMusic(localMusicList.value[0], true)
   onPlayEnd()
   // 不使用空格控制audio
-  
+
   // 监听全屏状态变化
   document.addEventListener('fullscreenchange', handleFullscreenChange)
 })

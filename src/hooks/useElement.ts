@@ -45,16 +45,26 @@ export function useElementStyle(element: any, person: IPersonConfig, index: numb
     element.children[1].textContent = person.name
   }
   element.children[2].style.fontSize = `${textSize * 0.5}px`
-  if (person.department || person.identity) {
-    element.children[2].innerHTML = `${person.department ? person.department : ''}<br/>${person.identity ? person.identity : ''}`
+  // 避免 innerHTML，防止未来导入数据导致 XSS 风险
+  const detailEl = element.children[2] as HTMLElement
+  detailEl.textContent = ''
+  const dept = person.department ?? ''
+  const identity = person.identity ?? ''
+  if (dept) {
+    detailEl.append(document.createTextNode(dept))
+  }
+  if (dept && identity) {
+    detailEl.append(document.createElement('br'))
+  }
+  if (identity) {
+    detailEl.append(document.createTextNode(identity))
   }
 
-    element.children[2].style.fontSize = textSize * 0.5 + 'px'
-    if (person.department || person.identity) {
-        element.children[2].innerHTML = `${person.department ? person.department : ''}<br/>${person.identity ? person.identity : ''}`
-    }
-    element.children[3].src = person.avatar
-    return element
+  const avatarEl = element.children[3] as HTMLImageElement
+  if (person.avatar) {
+    avatarEl.src = person.avatar
+  }
+  return element
 }
 
 /**

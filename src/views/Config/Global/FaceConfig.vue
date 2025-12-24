@@ -95,6 +95,10 @@ function resetData() {
   globalConfig.reset()
   personConfig.reset()
   prizeConfig.resetDefault()
+  // 同时清理持久化缓存，避免旧数据在 reload 后被重新 hydrate
+  localStorage.removeItem('globalConfig')
+  localStorage.removeItem('personConfig')
+  localStorage.removeItem('prizeConfig')
   // 刷新页面
   window.location.reload()
 }

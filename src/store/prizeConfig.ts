@@ -1,34 +1,24 @@
 import type { IPrizeConfig } from '@/types/storeType'
 import { defineStore } from 'pinia'
-import { defaultCurrentPrize, defaultPrizeList } from './data'
+import { defaultCurrentPrize, defaultPrizeList, defaultTemporaryPrize } from './data'
+
+function clone<T>(val: T): T {
+  return structuredClone(val)
+}
+
+function createDefaultPrizeConfig() {
+  return {
+    prizeList: clone(defaultPrizeList),
+    currentPrize: clone(defaultCurrentPrize),
+    temporaryPrize: clone(defaultTemporaryPrize),
+  }
+}
 
 export const usePrizeConfig = defineStore('prize', {
   state() {
     return {
       prizeConfig: {
-        prizeList: defaultPrizeList,
-        currentPrize: defaultCurrentPrize,
-        temporaryPrize: {
-          id: '',
-          name: '',
-          sort: 0,
-          isAll: false,
-          count: 1,
-          isUsedCount: 0,
-          picture: {
-            id: '-1',
-            name: '',
-            url: '',
-          },
-          separateCount: {
-            enable: true,
-            countList: [],
-          },
-          desc: '',
-          isShow: false,
-          isUsed: false,
-          frequency: 1,
-        } as IPrizeConfig,
+        ...createDefaultPrizeConfig(),
       },
     }
   },
@@ -113,55 +103,12 @@ export const usePrizeConfig = defineStore('prize', {
     },
     // 重置临时奖项
     resetTemporaryPrize() {
-      this.prizeConfig.temporaryPrize = {
-        id: '',
-        name: '',
-        sort: 0,
-        isAll: false,
-        count: 1,
-        isUsedCount: 0,
-        picture: {
-          id: '-1',
-          name: '',
-          url: '',
-        },
-        separateCount: {
-          enable: true,
-          countList: [],
-        },
-        desc: '',
-        isShow: false,
-        isUsed: false,
-        frequency: 1,
-      } as IPrizeConfig
+      this.prizeConfig.temporaryPrize = clone(defaultTemporaryPrize) as IPrizeConfig
     },
     // 重置所有配置
     resetDefault() {
-      this.prizeConfig = {
-        prizeList: defaultPrizeList,
-        currentPrize: defaultCurrentPrize,
-        temporaryPrize: {
-          id: '',
-          name: '',
-          sort: 0,
-          isAll: false,
-          count: 1,
-          isUsedCount: 0,
-          picture: {
-            id: '-1',
-            name: '',
-            url: '',
-          },
-          separateCount: {
-            enable: true,
-            countList: [],
-          },
-          desc: '',
-          isShow: false,
-          isUsed: false,
-          frequency: 1,
-        } as IPrizeConfig,
-      }
+      // 重要：必须深拷贝默认值，避免默认对象在抽奖过程中被污染导致“重置无效”
+      this.prizeConfig = createDefaultPrizeConfig()
     },
   },
   persist: {

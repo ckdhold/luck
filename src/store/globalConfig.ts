@@ -3,36 +3,46 @@ import i18n, { browserLanguage } from '@/locales/i18n'
 import { defineStore } from 'pinia'
 import { defaultImageList, defaultMusicList, defaultPatternList } from './data'
 // import { IPrizeConfig } from '@/types/storeType';
+
+function clone<T>(val: T): T {
+  return structuredClone(val)
+}
+
+function createDefaultGlobalConfig() {
+  const musicList = clone(defaultMusicList) as IMusic[]
+  const imageList = clone(defaultImageList) as IImage[]
+  return {
+    globalConfig: {
+      rowCount: 17,
+      isSHowPrizeList: true,
+      isShowAvatar: false,
+      topTitle: i18n.global.t('data.defaultTitle'),
+      language: browserLanguage,
+      theme: {
+        name: 'dracula',
+        detail: { primary: '#0f5fd3' },
+        cardColor: '#ff79c6',
+        cardWidth: 140,
+        cardHeight: 200,
+        textColor: '#ffffff',
+        luckyCardColor: '#ECB1AC',
+        textSize: 30,
+        patternColor: '#1b66c9',
+        patternList: clone(defaultPatternList) as number[],
+        background: {}, // 背景颜色或图片
+      },
+      musicList,
+      imageList,
+    },
+    currentMusic: {
+      item: musicList[0],
+      paused: true,
+    },
+  }
+}
 export const useGlobalConfig = defineStore('global', {
   state() {
-    return {
-      globalConfig: {
-        rowCount: 17,
-        isSHowPrizeList: true,
-        isShowAvatar: false,
-        topTitle: i18n.global.t('data.defaultTitle'),
-        language: browserLanguage,
-        theme: {
-          name: 'dracula',
-          detail: { primary: '#0f5fd3' },
-          cardColor: '#ff79c6',
-          cardWidth: 140,
-          cardHeight: 200,
-          textColor: '#ffffff',
-          luckyCardColor: '#ECB1AC',
-          textSize: 30,
-          patternColor: '#1b66c9',
-          patternList: defaultPatternList as number[],
-          background: {}, // 背景颜色或图片
-        },
-        musicList: defaultMusicList as IMusic[],
-        imageList: defaultImageList as IImage[],
-      },
-      currentMusic: {
-        item: defaultMusicList[0],
-        paused: true,
-      },
-    }
+    return createDefaultGlobalConfig()
   },
   getters: {
     // 获取全部配置
@@ -238,32 +248,9 @@ export const useGlobalConfig = defineStore('global', {
     },
     // 重置所有配置
     reset() {
-      this.globalConfig = {
-        rowCount: 17,
-        isSHowPrizeList: true,
-        isShowAvatar: false,
-        topTitle: i18n.global.t('data.defaultTitle'),
-        language: browserLanguage,
-        theme: {
-          name: 'dracula',
-          detail: { primary: '#0f5fd3' },
-          cardColor: '#ff79c6',
-          cardWidth: 140,
-          cardHeight: 200,
-          textColor: '#ffffff',
-          luckyCardColor: '#ECB1AC',
-          textSize: 30,
-          patternColor: '#1b66c9',
-          patternList: defaultPatternList as number[],
-          background: {}, // 背景颜色或图片
-        },
-        musicList: defaultMusicList as IMusic[],
-        imageList: defaultImageList as IImage[],
-      }
-      this.currentMusic = {
-        item: defaultMusicList[0],
-        paused: true,
-      }
+      const defaults = createDefaultGlobalConfig()
+      this.globalConfig = defaults.globalConfig
+      this.currentMusic = defaults.currentMusic
     },
   },
   persist: {

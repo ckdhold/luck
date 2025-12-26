@@ -26,27 +26,33 @@ export default defineConfig(({ mode }) => {
         base: mode === 'file' ? './' : '/log-lottery/',
         plugins: [
             vue(),
-            mode === 'file'
-                ? legacy({
-                    additionalLegacyPolyfills: ['regenerator-runtime/runtime'],
-                })
-                : null,
+            // 仅在file模式下启用legacy插件
+            ...(mode === 'file' ? [legacy({
+                additionalLegacyPolyfills: ['regenerator-runtime/runtime'],
+                modernPolyfills: false, // 禁用现代 polyfills 以减少内存占用
+            })] : []),
             // vueDevTools(),
-            viteCompression({
-                verbose: true,
-                disable: false,
-                threshold: 10240,
-                algorithm: 'gzip',
-                ext: '.gz',
-            }),
-            visualizer({
-                emitFile: true, // 是否被触摸
-                filename: 'test.html', // 生成分析网页文件名
-                open: true, // 在默认用户代理中打开生成的文件
-                gzipSize: true, // 从源代码中收集 gzip 大小并将其显示在图表中
-                brotliSize: true, // 从源代码中收集 brotli 大小并将其显示在图表中
-            }),
-
+            // 仅在非file模式下启用压缩以减少file模式下的内存占用
+            ...(mode === 'file' ? [] : [
+                viteCompression({
+                    verbose: true,
+                    disable: false,
+                    threshold: 10240,
+                    algorithm: 'gzip',
+                    ext: '.gz',
+                })
+            ]),
+            // 仅在非file模式下启用visualizer以减少file模式下的内存占用
+            ...(mode === 'file' ? [] : [
+                visualizer({
+                    emitFile: true, // 是否被触摸
+                    filename: 'test.html', // 生成分析网页文件名
+                    open: false, // 在默认用户代理中打开生成的文件（构建时关闭，避免崩溃）
+                    gzipSize: true, // 从源代码中收集 gzip 大小并将其显示在图表中
+                    brotliSize: true, // 从源代码中收集 brotli 大小并将其显示在图表中
+                })
+            ]),
+            // SVG图标插件始终启用，但对file模式进行优化
             createSvgIconsPlugin({
                 // 指定需要缓存的图标文件夹
                 iconDirs: [path.resolve(process.cwd(), 'src/icons')],
@@ -108,24 +114,26 @@ export default defineConfig(({ mode }) => {
         },
         build: {
             outDir: mode === 'file' ? 'dist-file' : 'dist',
-            minify: 'terser',
-            terserOptions: {
-                compress: {
-                    // 生产环境时移除console
-                    drop_console: true,
-                    drop_debugger: true,
+            minify: mode === 'file' ? false : (mode === 'prebuild' ? 'esbuild' : 'terser'), // file 模式不压缩以减少内存占用
+            ...(mode === 'file' ? {} : {
+                terserOptions: {
+                    compress: {
+                        // 生产环境时移除console
+                        drop_console: true,
+                        drop_debugger: true,
+                    },
                 },
-            },
+            }),
             //   关闭文件计算
             reportCompressedSize: false,
             //   关闭生成map文件 可以达到缩小打包体积
             sourcemap: false, // 这个生产环境一定要关闭，不然打包的产物会很大
             rollupOptions: {
                 output: {
-                    chunkFileNames: `js/${chunkName}-[hash].js`, // 引入文件名的名称
-                    entryFileNames: `js/${chunkName}-[hash].js`, // 包的入口文件名称
-                    assetFileNames: `[ext]/${chunkName}-[hash].[ext]`, // 资源文件像 字体，图片等
-                    manualChunks(id: any): string {
+                    chunkFileNames: mode === 'file' ? 'js/[name]-[hash].js' : `js/${chunkName}-[hash].js`, // 引入文件名的名称
+                    entryFileNames: mode === 'file' ? 'js/[name]-[hash].js' : `js/${chunkName}-[hash].js`, // 包的入口文件名称
+                    assetFileNames: mode === 'file' ? '[ext]/[name]-[hash].[ext]' : `[ext]/${chunkName}-[hash].[ext]`, // 资源文件像 字体，图片等
+                    manualChunks: mode === 'file' ? undefined : function manualChunks(id) {
                         if (id.includes('node_modules')) {
                             return id
                                 .toString()

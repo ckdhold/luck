@@ -19,7 +19,7 @@ export const configRoutesChildren = [
     component: () => import('@/views/Config/Global/FaceConfig.vue'),
     meta: {
       title: i18n.global.t('sidebar.viewSetting'),
-      icon: 'face',
+      icon: 'setting',
     },
   },
   // 2. 人员列表
@@ -29,7 +29,7 @@ export const configRoutesChildren = [
     component: () => import('@/views/Config/Person/PersonAll.vue'),
     meta: {
       title: i18n.global.t('sidebar.personList'),
-      icon: 'all',
+      icon: 'edit',
     },
   },
   // 3. 中奖人员
@@ -39,7 +39,7 @@ export const configRoutesChildren = [
     component: () => import('@/views/Config/Person/PersonAlready.vue'),
     meta: {
       title: i18n.global.t('sidebar.winnerList'),
-      icon: 'already',
+      icon: 'home',
     },
   },
   // 4. 奖品配置
@@ -49,7 +49,7 @@ export const configRoutesChildren = [
     component: () => import('@/views/Config/Prize/PrizeConfig.vue'),
     meta: {
       title: i18n.global.t('sidebar.prizeConfiguration'),
-      icon: 'prize',
+      icon: 'add',
     },
   },
   // 5. 图片管理
@@ -59,7 +59,7 @@ export const configRoutesChildren = [
     component: () => import('@/views/Config/Global/ImageConfig.vue'),
     meta: {
       title: i18n.global.t('sidebar.imagesManagement'),
-      icon: 'image',
+      icon: 'open',
     },
   },
   // 6. 音乐管理
@@ -69,7 +69,7 @@ export const configRoutesChildren = [
     component: () => import('@/views/Config/Global/MusicConfig.vue'),
     meta: {
       title: i18n.global.t('sidebar.musicManagement'),
-      icon: 'music',
+      icon: 'play',
     },
   },
   // 7. 操作说明
@@ -79,7 +79,7 @@ export const configRoutesChildren = [
     component: () => import('@/views/Config/Readme/index.vue'),
     meta: {
       title: i18n.global.t('sidebar.operatingInstructions'),
-      icon: 'readme',
+      icon: 'menu',
     },
   },
 ]

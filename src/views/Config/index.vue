@@ -23,7 +23,10 @@ function skip(path: string) {
         <a
           :style="item.name === route.name ? 'background-color:rgba(12,12,12,0.2)' : ''"
           @click="skip(item.path)"
-        >{{ item.meta!.title }}</a>
+        >
+          <svg-icon v-if="item.meta?.icon" :name="item.meta.icon" />
+          {{ item.meta!.title }}
+        </a>
       </li>
     </ul>
     <router-view class="flex-1 mt-5" />

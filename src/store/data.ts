@@ -250,6 +250,11 @@ export const defaultPersonList = generateDefaultPersonList(50)
 
 export const defaultMusicList = [
   {
+    id: `Radetzky March.mp3${new Date().getTime().toString()}`,
+    name: 'Radetzky March.mp3',
+    url: `${originUrl}/resource/audio/Radetzky March.mp3`,
+  },
+  {
     id: `Geoff Knorr - China (The Industrial Era).ogg${new Date().getTime().toString()}`,
     name: 'Geoff Knorr - China (The Industrial Era).ogg',
     url: `${originUrl}/resource/audio/Geoff Knorr - China (The Industrial Era).ogg`,
@@ -258,11 +263,6 @@ export const defaultMusicList = [
     id: `Geoff Knorr&Phill Boucher - China (The Atomic Era).ogg${new Date().getTime().toString()}`,
     name: 'Geoff Knorr&Phill Boucher - China (The Atomic Era).ogg',
     url: `${originUrl}/resource/audio/Geoff Knorr&Phill Boucher - China (The Atomic Era).ogg`,
-  },
-  {
-    id: `Radetzky March.mp3${new Date().getTime().toString()}`,
-    name: 'Radetzky March.mp3',
-    url: `${originUrl}/resource/audio/Radetzky March.mp3`,
   },
   {
     id: `Shanghai.mp3${new Date().getTime().toString()}`,

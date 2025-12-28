@@ -724,9 +724,10 @@ onUnmounted(() => {
 <template>
   <div class="absolute z-10 flex flex-col items-center justify-center -translate-x-1/2 left-1/2">
     <h2
-      class="pt-12 m-0 mb-12 font-mono tracking-wide text-center leading-12 header-title"
+      class="pt-12 m-0 mb-12 font-mono tracking-wide text-center leading-12 header-title flex items-center justify-center gap-3"
       :style="{ fontSize: `${textSize * 1.5}px`, color: textColor }"
     >
+      <img src="/favicon.svg" alt="Luck" class="w-12 h-12" />
       {{ topTitle }}
     </h2>
     <div class="flex gap-3">

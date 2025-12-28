@@ -1,6 +1,4 @@
-# Operation Guide
-
-## Steps
+## Operation Steps
 
 1. Upon first entry, no data will be displayed. You can choose to use default data to view the overall display effect. It is recommended to import your own data for operation. The steps are as follows:
 

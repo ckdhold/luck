@@ -201,8 +201,7 @@ onMounted(() => {
       </div>
     </div>
   </dialog>
-  <div class="min-w-1000px">
-    <h2>{{ t('viewTitle.personManagement') }}</h2>
+  <div class="min-w-1000px mt-6">
     <div class="flex gap-3">
       <button class="btn btn-error btn-sm" @click="delAllDataDialog.showModal()">
         {{ t('button.allDelete') }}

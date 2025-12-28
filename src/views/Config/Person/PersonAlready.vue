@@ -63,7 +63,6 @@ const tableColumnsList = [
 
 <template>
   <div class="overflow-y-auto">
-    <h2>{{ t('viewTitle.winnerManagement') }}</h2>
     <div class="flex items-center justify-start gap-10">
       <div>
         <span>{{ t('table.luckyPeopleNumber') }}：</span>

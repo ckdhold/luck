@@ -149,7 +149,6 @@ watch(() => prizeList.value, (val: IPrizeConfig[]) => {
 
 <template>
   <div>
-    <h2>{{ t('viewTitle.prizeManagement') }}</h2>
     <div class="flex w-full gap-3 mb-6">
       <button class="btn btn-info btn-sm" @click="addPrize">
         {{ t('button.add') }}

@@ -27,7 +27,32 @@ async function handleFileChange(e: Event) {
   const workBook = XLSX.read(dataBinary, { type: 'binary', cellDates: true })
   const workSheet = workBook.Sheets[workBook.SheetNames[0]]
   const excelData = XLSX.utils.sheet_to_json(workSheet)
-  const allData = addOtherInfo(excelData)
+  
+  // 将中文/英文表头映射到英文字段名
+  const fieldMapping: Record<string, string> = {
+    // 中文表头
+    [i18n.global.t('data.number')]: 'uid',
+    [i18n.global.t('data.name')]: 'name',
+    [i18n.global.t('data.department')]: 'department',
+    [i18n.global.t('data.identity')]: 'identity',
+    // 英文表头（兼容英文模板）
+    'Number': 'uid',
+    'Name': 'name',
+    'Department': 'department',
+    'Position': 'identity',
+  }
+  
+  // 转换字段名
+  const mappedData = excelData.map((row: any) => {
+    const newRow: any = {}
+    for (const key in row) {
+      const mappedKey = fieldMapping[key] || key
+      newRow[mappedKey] = row[key]
+    }
+    return newRow
+  })
+  
+  const allData = addOtherInfo(mappedData)
   personConfig.resetPerson()
   personConfig.addNotPersonList(allData)
 }

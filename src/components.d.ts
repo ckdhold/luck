@@ -9,7 +9,6 @@ declare module 'vue' {
   export interface GlobalComponents {
     DaiysuiTable: typeof import('./components/DaiysuiTable/index.vue')['default']
     EditSeparateDialog: typeof import('./components/NumberSeparate/EditSeparateDialog.vue')['default']
-    HelloWorld: typeof import('./components/HelloWorld.vue')['default']
     ImageSync: typeof import('./components/ImageSync/index.vue')['default']
     PlayMusic: typeof import('./components/PlayMusic/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

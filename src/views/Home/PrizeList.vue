@@ -104,7 +104,7 @@ onMounted(() => {
         <div class="flex flex-col gap-3">
           <label class="flex w-full max-w-xs">
             <div class="label">
-              <span class="label-text">{{ t('table.name') }}:</span>
+              <span class="label-text">{{ t('table.prizeName') }}:</span>
             </div>
             <input
               v-model="temporaryPrize.name" type="text" :placeholder="t('placeHolder.name')"
@@ -180,6 +180,9 @@ onMounted(() => {
               </option>
             </select>
           </label>
+          <div class="mt-2 text-sm text-gray-500">
+            <p>说明：此选项用于在导入数据并设置好奖项之后，在抽奖过程中需要临时增加奖项的情况下使用。使用之前请测试流程，谢谢</p>
+          </div>
         </div>
         <div class="modal-action">
           <form method="dialog" class="flex gap-3">

@@ -18,7 +18,7 @@ function skip(path: string) {
 
 <template>
   <div class="flex min-h-[calc(100%-280px)]">
-    <ul class="w-56 m-0 mr-3 min-w-56 menu bg-base-200 pt-14">
+    <ul class="pt-14 m-0 mr-3 w-56 min-w-56 menu bg-base-200">
       <li v-for="item in menuList" :key="item.name">
         <a
           :style="item.name === route.name ? 'background-color:rgba(12,12,12,0.2)' : ''"
@@ -33,34 +33,34 @@ function skip(path: string) {
   </div>
   <footer class="p-10 rounded footer footer-center bg-base-200 text-base-content">
     <aside>
-      <div class="flex items-center justify-center gap-2">
+      <div class="flex gap-2 justify-center items-center">
         <p class="p-0 m-0 text-center">
           Copyright &copy; 2025-2030.
           <a
-            href="https://thus.chat/"
+            href="https://www.cked.cn/index.html#/pages/profile/profile"
             target="_blank"
             rel="noopener noreferrer"
-            class="text-inherit no-underline font-normal"
-          >nabin-cn</a>.
+            class="font-normal no-underline text-inherit"
+          >cked.cn</a>.
           <a
-            href="https://jinshuju.com/f/vaSGYu"
+            href="https://www.cked.cn/index.html#/pages/contact/contact"
             target="_blank"
             rel="noopener noreferrer"
-            class="ml-1 text-inherit no-underline font-normal"
+            class="ml-1 font-normal no-underline text-inherit"
           >意见反馈.</a>
           <a
-            href="https://donate.nabin.cn/"
+            href="https://www.cked.cn/index.html#/pages/donate/donate"
             target="_blank"
             rel="noopener noreferrer"
-            class="ml-1 text-inherit no-underline font-normal"
+            class="ml-1 font-normal no-underline text-inherit"
           >赞赏.</a>
           All Rights Reserved.
         </p>
         <a
-          href="https://github.com/xiaolinbaba/luck"
+          href="https://github.com/ckdhold/luck#"
           target="_blank"
           rel="noopener noreferrer"
-          class="cursor-pointer text-inherit hover:opacity-80 transition-opacity"
+          class="transition-opacity cursor-pointer text-inherit hover:opacity-80"
         >
           <svg-icon name="github" />
         </a>
